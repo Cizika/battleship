@@ -1,14 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ModoButton extends JButton implements ActionListener {
+public class ModoButton extends JButton  {
     boolean isSingleplayer;
 
     public ModoButton(boolean isSingleplayer) {
-
-        this.addActionListener(this);
         this.setFocusable(false);
         this.setFocusPainted(false);
         this.setHorizontalTextPosition(JButton.LEFT);
@@ -25,10 +21,5 @@ public class ModoButton extends JButton implements ActionListener {
             this.setIcon(new ImageIcon("multiplayer.png"));
             this.setText("Multiplayer");
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }
