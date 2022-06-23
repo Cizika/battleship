@@ -45,6 +45,7 @@ public class MenuFrame extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Batalha Naval");
         this.setIconImage(this.logo);
+        this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
