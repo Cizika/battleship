@@ -11,12 +11,12 @@ public class MenuPanel extends JPanel {
     public MenuPanel() {
 
         // Configurando imagem de fundo
-        this.backgroundImage = new ImageIcon("background.jpg").getImage();
+        this.backgroundImage = new ImageIcon("media/background.jpg").getImage();
         this.setPreferredSize(new Dimension(1050, 600));
 
         // Criando fonte personalizada
         try {
-            this.warFont = Font.createFont(Font.TRUETYPE_FONT, new File("WarFont.ttf"));
+            this.warFont = Font.createFont(Font.TRUETYPE_FONT, new File("media/WarFont.ttf"));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(this.warFont);
         } catch (FontFormatException | IOException e) {

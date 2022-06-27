@@ -64,7 +64,7 @@ public class Singleplayer extends JFrame implements ActionListener {
         this.startButton = new JButton();
         startButton.setText("Iniciar");
         try {
-            this.startFont = Font.createFont(Font.TRUETYPE_FONT, new File("StartFont.ttf"));
+            this.startFont = Font.createFont(Font.TRUETYPE_FONT, new File("media/StartFont.ttf"));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(this.startFont);
         } catch (FontFormatException | IOException e) {
@@ -96,7 +96,7 @@ public class Singleplayer extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 900);
         this.setTitle("Batalha Naval");
-        this.setIconImage(new ImageIcon("logo.png").getImage());
+        this.setIconImage(new ImageIcon("media/logo.png").getImage());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(8, 103, 158));

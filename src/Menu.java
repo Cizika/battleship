@@ -13,7 +13,7 @@ public class Menu extends JFrame implements ActionListener {
 
     public Menu() {
         // Iniciando Componentes
-        this.logo = new ImageIcon("logo.png").getImage();
+        this.logo = new ImageIcon("media/logo.png").getImage();
         this.mainPanel = new JLayeredPane();
         mainPanel.setLayout(new OverlayLayout(mainPanel));
 

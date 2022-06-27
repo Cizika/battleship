@@ -14,10 +14,10 @@ public class ModoButton extends JButton  {
         this.setBackground(Color.yellow);
 
         if(isSingleplayer){
-            this.setIcon(new ImageIcon("singleplayer.png"));
+            this.setIcon(new ImageIcon("media/singleplayer.png"));
             this.setText("Singleplayer");
         } else{
-            this.setIcon(new ImageIcon("multiplayer.png"));
+            this.setIcon(new ImageIcon("media/multiplayer.png"));
             this.setText("Multiplayer");
         }
     }
