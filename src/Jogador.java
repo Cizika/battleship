@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public abstract class Jogador {
+    private final ArrayList<Navio> naviosOperantes;
     private int naviosAPoscionar;
-    private ArrayList<Navio> naviosOperantes;
     private String nome;
 
     public Jogador() {
@@ -11,7 +11,7 @@ public abstract class Jogador {
         this.naviosAPoscionar = 5;
     }
 
-    public Jogador(String nome, boolean myTurn) {
+    public Jogador(String nome) {
         this.nome = nome;
         this.naviosOperantes = new ArrayList<>();
         this.naviosAPoscionar = 5;
@@ -25,24 +25,27 @@ public abstract class Jogador {
         return naviosOperantes;
     }
 
-    public Navio getNavioByParte(Quadrado parte){
-        for(Navio navio: this.naviosOperantes){
-            if(navio.containsQuadrado(parte))
-                return navio;
+    // Método para recuperar um Navio através de um Quadrado que o compõe
+    public Navio getNavioByParte(Quadrado parte) {
+        for (Navio navio : this.naviosOperantes) {
+            if (navio.containsQuadrado(parte)) return navio;
         }
         return null;
     }
 
-    protected void tornarNavioOperante(Navio navio){
+    // Uma vez posicionado, o navio se torna Operante
+    protected void tornarNavioOperante(Navio navio) {
         this.naviosOperantes.add(navio);
         this.naviosAPoscionar--;
     }
 
-    protected void navioAbatido(Navio navio){
+    // Método para abater um navio (todos os quadrados foram atingidos)
+    protected void navioAbatido(Navio navio) {
         this.naviosOperantes.remove(navio);
     }
 
-    protected boolean perdeu(){
+    // Lógica para verificar se jogador perdeu
+    protected boolean perdeu() {
         return this.naviosOperantes.size() == 0;
     }
 

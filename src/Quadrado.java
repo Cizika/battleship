@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class Quadrado extends JButton {
     private int coordenadaX;
@@ -20,6 +19,10 @@ public class Quadrado extends JButton {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
     }
 
+    public boolean isAtingido() {
+        return isAtingido;
+    }
+
     public int getCoordenadaX() {
         return coordenadaX;
     }
@@ -36,9 +39,11 @@ public class Quadrado extends JButton {
         this.coordenadaY = coordenadaY;
     }
 
-    public TipoQuadrado getTipo() { return tipo;}
+    public TipoQuadrado getTipo() {
+        return tipo;
+    }
 
-    public void esconderQuadrado(){
+    public void esconderQuadrado() {
         this.setBackground(new Color(19, 139, 209));
     }
 
@@ -52,29 +57,24 @@ public class Quadrado extends JButton {
         this.setBackground(new Color(118, 161, 10));
     }
 
-    public void setAgua(){
+    public void setAgua() {
         this.tipo = TipoQuadrado.AGUA;
         this.setBackground(new Color(19, 139, 209));
     }
 
-    public boolean isAtingido() {
-        return isAtingido;
-    }
-
-    public void atingido(){
+    public void atingido() {
         this.isAtingido = true;
         this.setEnabled(false);
 
-        if(this.tipo != TipoQuadrado.AGUA)
+        if (this.tipo != TipoQuadrado.AGUA)
             this.setBackground(new Color(209, 25, 47));
         else
             this.setBackground(new Color(32, 36, 33));
-
     }
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Quadrado){
+        if (o instanceof Quadrado) {
             Quadrado quadrado = (Quadrado) o;
             return quadrado.getCoordenadaX() == this.coordenadaX && quadrado.getCoordenadaY() == this.coordenadaY;
         }

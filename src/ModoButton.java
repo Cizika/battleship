@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ModoButton extends JButton  {
-    boolean isSingleplayer;
 
     public ModoButton(boolean isSingleplayer) {
         this.setFocusable(false);

@@ -1,3 +1,3 @@
 public enum TipoQuadrado {
-    PROA,CASCO,AGUA;
+    PROA, CASCO, AGUA
 }
