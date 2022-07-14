@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Quadrado extends JButton {
+public class Quadrado extends JButton implements Serializable {
     private int coordenadaX;
     private int coordenadaY;
     private TipoQuadrado tipo;
@@ -43,25 +44,30 @@ public class Quadrado extends JButton {
         return tipo;
     }
 
+    // Método para esconder Quadrado do Oponente
     public void esconderQuadrado() {
         this.setBackground(new Color(19, 139, 209));
     }
 
+    // Configurar visualmente Casco do Navio
     public void setCasco() {
         this.tipo = TipoQuadrado.CASCO;
         this.setBackground(new Color(73, 230, 11));
     }
 
+    // Configurar visualmente Proa do Navio
     public void setProa() {
         this.tipo = TipoQuadrado.PROA;
         this.setBackground(new Color(118, 161, 10));
     }
 
+    // Configurar visualmente Água
     public void setAgua() {
         this.tipo = TipoQuadrado.AGUA;
         this.setBackground(new Color(19, 139, 209));
     }
 
+    // Mudando quadrado quando atingido
     public void atingido() {
         this.isAtingido = true;
         this.setEnabled(false);

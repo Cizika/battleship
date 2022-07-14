@@ -131,7 +131,7 @@ public class Singleplayer extends JFrame implements ActionListener {
         // Ação para Start Button
         if (e.getSource() == this.startButton) {
             // Caso todos os navios tenham sido posicionados pelo usuário, o jogo inicia
-            if (this.tabuleiroUsuario.getJogador().getNaviosAPosicionar() == 0)
+            if (this.tabuleiroUsuario.getJogador().getNaviosAPosicionar().isEmpty())
                 iniciarPartida();
             else
                 JOptionPane.showMessageDialog(this, "Posicione todos seus Navios!", "Antes de Iniciar", JOptionPane.WARNING_MESSAGE);
@@ -176,13 +176,13 @@ public class Singleplayer extends JFrame implements ActionListener {
             }
             // Jogo não iniciado
             // Ao clicar na água um novo Navio será posicionado
-            else if (quadrado.getTipo() == TipoQuadrado.AGUA && this.tabuleiroUsuario.getJogador().getNaviosAPosicionar() > 0) {
+            else if (quadrado.getTipo() == TipoQuadrado.AGUA && !this.tabuleiroUsuario.getJogador().getNaviosAPosicionar().isEmpty()) {
 
                 // Verificando se haverá sobreposição entre o novo Navio e os já posicionados
-                if (!this.tabuleiroUsuario.verificarSobreposicao(quadrado, this.tabuleiroUsuario.getJogador().getNaviosAPosicionar(), true)) {
+                if (!this.tabuleiroUsuario.verificarSobreposicao(quadrado, this.tabuleiroUsuario.getJogador().proximoNavioAPosicionar(), true)) {
 
                     // Criando Navio com o quadrado como Proa
-                    Navio navio = new Navio(quadrado, this.tabuleiroUsuario.getJogador().getNaviosAPosicionar()); // Alterar lógica do tamanho do navio
+                    Navio navio = new Navio(quadrado, this.tabuleiroUsuario.getJogador().proximoNavioAPosicionar());
 
                     // Posicionando Resto do Navio na vertical
                     this.tabuleiroUsuario.posicionarNavio(navio, navio.isVertical());
@@ -200,7 +200,7 @@ public class Singleplayer extends JFrame implements ActionListener {
                         this.tabuleiroUsuario.findQuadrado(quadrado.getCoordenadaX(), quadrado.getCoordenadaY() + 1);
 
                 // Verificando se após a rotação haverá sobreposição entre os Navios
-                if (!this.tabuleiroUsuario.verificarSobreposicao(firstCasco, navio.getTamanho() - 1, !navio.isVertical())) {
+                if (firstCasco != null && !this.tabuleiroUsuario.verificarSobreposicao(firstCasco, navio.getTamanho() - 1, !navio.isVertical())) {
 
                     // Rotacionando Navio no Tabuleiro
                     this.tabuleiroUsuario.rotacionarNavio(navio);

@@ -1,0 +1,3 @@
+public enum TipoBotao {
+    SINGLEPLAYER, MULTIPLAYER, CLIENTE, SERVIDOR
+}

@@ -25,11 +25,14 @@ public class Navio {
         proa.setProa();
         this.corpo.add(proa);
 
+        // Estabelecendo orientação
         this.vertical = orientacao;
 
+        // Estabelecendo tamanho
         this.tamanho = tamanho;
     }
 
+    // Verifica se o Navio ainda está operante, isto é, ainda há algum corpo operante/vivo
     public boolean isOperante() {
         for (Quadrado quadrado : this.corpo)
             if (!quadrado.isAtingido())
@@ -37,11 +40,13 @@ public class Navio {
         return false;
     }
 
+    // Método para adicionar um Quadrado como Casco/Corpo do navio
     public void adicionarCorpo(Quadrado quadrado) {
         quadrado.setCasco();
         this.corpo.add(quadrado);
     }
 
+    // Método para trocar um Quadrado do Corpo do Navio por outro
     public void trocarCorpo(Quadrado novoCorpo, int index) {
         this.corpo.get(index).setAgua();
         novoCorpo.setCasco();
@@ -64,11 +69,13 @@ public class Navio {
         return this.corpo.get(0);
     }
 
+    // Método para rotacionar Navio
     public void rotacionar() {
         // Aplicando Rotação
         this.vertical = !this.vertical;
     }
 
+    // Verifica se o Navio possui um Quadrado em seu corpo
     public boolean containsQuadrado(Quadrado quadrado) {
         for (Quadrado corpoNavio : this.corpo) {
             if (corpoNavio.equals(quadrado))

@@ -1,24 +1,32 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public abstract class Jogador {
+public abstract class Jogador implements Serializable {
     private final ArrayList<Navio> naviosOperantes;
-    private int naviosAPoscionar;
+    private final ArrayList<Integer>  naviosAPosicionar;
     private String nome;
 
     public Jogador() {
         this.nome = "";
         this.naviosOperantes = new ArrayList<>();
-        this.naviosAPoscionar = 5;
+        this.naviosAPosicionar = new ArrayList<>();
+        Collections.addAll(naviosAPosicionar, 5, 4, 4, 3, 3, 3, 2, 2, 2, 2);
     }
 
     public Jogador(String nome) {
         this.nome = nome;
         this.naviosOperantes = new ArrayList<>();
-        this.naviosAPoscionar = 5;
+        this.naviosAPosicionar = new ArrayList<>();
+        Collections.addAll(naviosAPosicionar, 5, 4, 4, 3, 3, 3, 2, 2, 2, 2);
     }
 
-    public int getNaviosAPosicionar() {
-        return naviosAPoscionar;
+    public ArrayList<Integer> getNaviosAPosicionar() {
+        return naviosAPosicionar;
+    }
+
+    public int proximoNavioAPosicionar() {
+        return naviosAPosicionar.get(0);
     }
 
     public ArrayList<Navio> getNaviosOperantes() {
@@ -36,7 +44,7 @@ public abstract class Jogador {
     // Uma vez posicionado, o navio se torna Operante
     protected void tornarNavioOperante(Navio navio) {
         this.naviosOperantes.add(navio);
-        this.naviosAPoscionar--;
+        this.naviosAPosicionar.remove((Integer) navio.getTamanho());
     }
 
     // Método para abater um navio (todos os quadrados foram atingidos)

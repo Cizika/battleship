@@ -3,17 +3,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Menu extends JFrame implements ActionListener {
-
+public class MultiplayerSelect extends JFrame implements ActionListener {
     private final JLayeredPane mainPanel;
     private final Image logo;
-    private final JButton singleplayerButton;
-    private final JButton multiplayerButton;
+    private final JButton existingConnectionButton;
+    private final JButton newServerButton;
+    private final String nome;
 
-
-    public Menu() {
+    public MultiplayerSelect(String nome) {
         // Iniciando Componentes
         this.logo = new ImageIcon("media/logo.png").getImage();
+        this.nome = nome;
         this.mainPanel = new JLayeredPane();
         mainPanel.setLayout(new OverlayLayout(mainPanel));
 
@@ -24,17 +24,17 @@ public class Menu extends JFrame implements ActionListener {
         buttonPanel.setOpaque(false);
 
         // Adicionando Botão de Singleplayer
-        this.singleplayerButton = new ModoButton(true);
-        this.singleplayerButton.addActionListener(this);
+        existingConnectionButton = new ModoButton(TipoBotao.CLIENTE);
+        existingConnectionButton.addActionListener(this);
 
         // Adicionando Botão de Multiplayer
-        this.multiplayerButton = new ModoButton(false);
-        this.multiplayerButton.addActionListener(this);
+        newServerButton = new ModoButton(TipoBotao.SERVIDOR);
+        newServerButton.addActionListener(this);
 
         // Adicionando botões ao ButtonPanel
-        buttonPanel.add(this.singleplayerButton);
+        buttonPanel.add(this.existingConnectionButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(50, 0)));
-        buttonPanel.add(this.multiplayerButton);
+        buttonPanel.add(this.newServerButton);
 
         // Adicionando MainPanel
         this.mainPanel.add(new MenuPanel(), Integer.valueOf(0));
@@ -53,17 +53,24 @@ public class Menu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.singleplayerButton) {
-            // Questionando nome do Jogador
-            String nome = JOptionPane.showInputDialog("Qual seu nome?");
+        if (e.getSource() == existingConnectionButton) {
+            // Verificando se servidor está conectado
+            if(Cliente.servidorEncontrado()){
+                // Servidor encontrado, iniciando cliente
+                this.dispose();
+                new Cliente(this.nome);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Nenhum servidor para se conectar. Tente abrir um!", "Erro no Servidor", JOptionPane.WARNING_MESSAGE);
+            }
 
-            //  Iniciando Modo Singleplayer
+        } else if (e.getSource() == newServerButton) {
+            // Iniciando Servidor para Multiplayer
             this.dispose();
-            new Singleplayer(nome);
+            Servidor servidor = new Servidor(this.nome);
 
-        } else if (e.getSource() == this.multiplayerButton) {
-            // Modo Multiplayer ainda não implementado
-            JOptionPane.showMessageDialog(null, "Multiplayer ainda não implementado!", "Multiplayer", JOptionPane.INFORMATION_MESSAGE);
+            // Aguardando conexão do cliente
+            servidor.ligar();
         }
     }
 }

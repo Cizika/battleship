@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,7 +9,7 @@ public class Tabuleiro extends JPanel {
     private final ArrayList<Quadrado> grelha;
     private Jogador jogador;
 
-    public Tabuleiro(Jogador jogador, Singleplayer frame) {
+    public Tabuleiro(Jogador jogador, ActionListener frame) {
 
         // Iniciando tabuleiro do jogador
         this.jogador = jogador;
@@ -38,6 +39,7 @@ public class Tabuleiro extends JPanel {
             this.habilitarGrelha(false);
     }
 
+    // Método para habilitar ou desabilitar grelha
     public void habilitarGrelha(boolean enable) {
         for (Quadrado quadrado : this.grelha)
             quadrado.setEnabled(enable);
@@ -114,15 +116,15 @@ public class Tabuleiro extends JPanel {
 
     // Posiciona Aleatoriamente os Navios no Tabuleiro
     public void posicionarAleatoriamente() {
-        while (this.getJogador().getNaviosAPosicionar() > 0) {
+        while (!this.getJogador().getNaviosAPosicionar().isEmpty()) {
             int randomX = new Random().nextInt(this.getDimensao());
             int randomY = new Random().nextInt(this.getDimensao());
             boolean orientacao = new Random().nextBoolean();
 
             Quadrado proa = this.findQuadrado(randomX, randomY);
 
-            if (!verificarSobreposicao(proa, this.getJogador().getNaviosAPosicionar(), orientacao)) {
-                Navio navio = new Navio(proa, this.getJogador().getNaviosAPosicionar(), orientacao);
+            if (!verificarSobreposicao(proa, this.getJogador().proximoNavioAPosicionar(), orientacao)) {
+                Navio navio = new Navio(proa, this.getJogador().proximoNavioAPosicionar(), orientacao);
                 this.posicionarNavio(navio, navio.isVertical());
             }
         }
